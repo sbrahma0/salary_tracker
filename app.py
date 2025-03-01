@@ -4,6 +4,25 @@ import sqlite3
 import pandas as pd
 import time
 
+# Function to initialize the database
+def initialize_db():
+    conn = sqlite3.connect('salary.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS Employees (
+        employee_id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        designation TEXT,
+        base_salary REAL,
+        joining_date TEXT
+    )
+    ''')
+    conn.commit()
+    conn.close()
+
+# Initialize the database
+initialize_db()
+
 # Function to connect to the database
 def connect_db():
     return sqlite3.connect('salary.db')
